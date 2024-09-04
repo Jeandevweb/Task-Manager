@@ -39,7 +39,7 @@ const TaskItem = ({task, tasks, setTasks}) => {
     setIsEditing(false);
   }
   return (
-    <ListItem key={task.id}>
+    <ListItem key={task.id} display="flex">
       {isEditing ? (
         <Input
           type="text"

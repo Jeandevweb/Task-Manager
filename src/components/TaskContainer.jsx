@@ -1,41 +1,13 @@
 import {
   Box,
-  Button,
-  Checkbox,
-  FormControl,
-  Input,
   List,
-  ListItem,
-  Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import TaskItem from "./TaskItem";
+import TaskCreateForm from "./TaskCreateForm";
 
 const TaskContainer = () => {
-  const [newTask, setNewTask] = useState("");
   const [tasks, setTasks] = useState([]);
-
-  const createTask = {
-    id: Date.now(),
-    name: newTask,
-    completed: false,
-    subTask: [],
-  };
-  console.log(tasks);
-
-  /**
-   * Function to create new task
-   * @param event to prevent submit form
-   */
-  function createNewTask(e) {
-    e.preventDefault();
-    if (newTask.trim() !== "") {
-      setTasks((prevTask) => {
-        return [...prevTask, createTask];
-      });
-    }
-    setNewTask("");
-  }
 
   return (
     <Box
@@ -48,18 +20,8 @@ const TaskContainer = () => {
       left="50%"
       transform="translate(-50%, -50%)"
     >
-      <Text textAlign="center"> Task Manager </Text>
-      <FormControl display="flex">
-        <Input
-          type="text"
-          placeholder="Add a new task"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-        />
-        <Button type="submit" onClick={createNewTask}>
-          Add Task
-        </Button>
-      </FormControl>
+
+      <TaskCreateForm setTasks={setTasks} />
 
       <List>
         {tasks.map((task) => {
