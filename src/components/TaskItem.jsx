@@ -1,10 +1,12 @@
 import { Button, Checkbox, Input, ListItem } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdDelete, MdEdit, MdCancel, MdOutlineSave } from "react-icons/md";
+import { UseToast } from "../hooks/useToast";
 
 const TaskItem = ({ task, tasks, setTasks }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(task.name);
+  const { toastInfo } = UseToast();
 
   /**
    * Function to create new task
@@ -49,6 +51,8 @@ const TaskItem = ({ task, tasks, setTasks }) => {
         return todo;
       });
     });
+    if (completed)
+      toastInfo(`${task.name} a été complété`, "top", "success", 3000);
   }
 
   return (
@@ -60,7 +64,11 @@ const TaskItem = ({ task, tasks, setTasks }) => {
           onChange={(e) => setNewName(e.target.value)}
         />
       ) : (
-        <Checkbox onChange={(e) => toggleTodo(task.id, e.target.checked)}>
+        <Checkbox
+          onChange={(e) => {
+            toggleTodo(task.id, e.target.checked);
+          }}
+        >
           {task.name}
         </Checkbox>
       )}

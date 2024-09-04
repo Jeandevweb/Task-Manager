@@ -1,8 +1,11 @@
 import { Button, FormControl, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
+import { UseToast } from "../hooks/useToast";
+
 const TaskCreateForm = ({ setTasks }) => {
-  const [newTask, setNewTask] = useState("");
+    const [newTask, setNewTask] = useState("");
+    const {toastInfo} = UseToast()
 
   const createTask = {
     id: Date.now(),
@@ -21,7 +24,8 @@ const TaskCreateForm = ({ setTasks }) => {
       setTasks((prevTask) => {
         return [...prevTask, createTask];
       });
-    }
+      }
+      toastInfo(`${newTask} a été créé`, "top", "success", 3000);
     setNewTask("");
   }
   return (
