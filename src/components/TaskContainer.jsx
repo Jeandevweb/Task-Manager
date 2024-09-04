@@ -3,14 +3,13 @@ import {
   Button,
   Checkbox,
   FormControl,
-  IconButton,
   Input,
   List,
   ListItem,
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { MdDelete } from "react-icons/md";
+import TaskItem from "./TaskItem";
 
 const TaskContainer = () => {
   const [newTask, setNewTask] = useState("");
@@ -21,8 +20,8 @@ const TaskContainer = () => {
     name: newTask,
     completed: false,
     subTask: [],
-    };
-    console.log(tasks)
+  };
+  console.log(tasks);
 
   /**
    * Function to create new task
@@ -38,15 +37,6 @@ const TaskContainer = () => {
     setNewTask("");
   }
 
-  /**
-   * Function to create new task
-   * @param id current id of the task
-   */
-  function deleteTask(id) {
-    setTasks((prevTask) => {
-      return prevTask.filter((task) => task.id !== id);
-    });
-  }
   return (
     <Box
       width="50%"
@@ -74,12 +64,12 @@ const TaskContainer = () => {
       <List>
         {tasks.map((task) => {
           return (
-            <ListItem key={task.id}>
-              <Checkbox>{task.name}</Checkbox>
-              <Button onClick={() => deleteTask(task.id)}>
-                <MdDelete />
-              </Button>
-            </ListItem>
+            <TaskItem
+              key={task.id}
+              task={task}
+              tasks={tasks}
+              setTasks={setTasks}
+            />
           );
         })}
       </List>
