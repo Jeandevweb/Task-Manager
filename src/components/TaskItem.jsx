@@ -1,9 +1,16 @@
 import { Button, Checkbox, Input, ListItem } from "@chakra-ui/react";
 import { useState } from "react";
-import { MdDelete, MdEdit, MdCancel, MdOutlineSave } from "react-icons/md";
+import {
+  MdDelete,
+  MdEdit,
+  MdCancel,
+  MdOutlineSave,
+  MdArrowDropUp,
+  MdArrowDropDown,
+} from "react-icons/md";
 import { UseToast } from "../hooks/useToast";
 
-const TaskItem = ({ task, tasks, setTasks }) => {
+const TaskItem = ({ task, tasks, setTasks, index }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(task.name);
   const { toastInfo } = UseToast();
@@ -55,6 +62,36 @@ const TaskItem = ({ task, tasks, setTasks }) => {
       toastInfo(`${task.name} a été complété`, "top", "success", 3000);
   }
 
+  /**
+   * Function to moveup the current task
+   * @param {number} index current index of the task
+   */
+  function moveTaskUp(index) {
+    if (index > 0) {
+      const newArrayOfTasks = [...tasks];
+      [newArrayOfTasks[index], newArrayOfTasks[index - 1]] = [
+        newArrayOfTasks[index - 1],
+        newArrayOfTasks[index],
+      ];
+      setTasks(newArrayOfTasks);
+    }
+  }
+
+  /**
+   * Function to movedown the current task
+   * @param {number} index current index of the task
+   */
+  function moveTaskDown(index) {
+    if (index < tasks.length - 1) {
+      const newArrayOfTasks = [...tasks];
+      [newArrayOfTasks[index], newArrayOfTasks[index + 1]] = [
+        newArrayOfTasks[index + 1],
+        newArrayOfTasks[index],
+      ];
+      setTasks(newArrayOfTasks);
+    }
+  }
+
   return (
     <ListItem key={task.id} display="flex">
       {isEditing ? (
@@ -83,6 +120,15 @@ const TaskItem = ({ task, tasks, setTasks }) => {
         </>
       ) : (
         <>
+          <Button
+            isDisabled={tasks[0] === index ? true : false}
+            onClick={() => moveTaskUp(index)}
+          >
+            <MdArrowDropUp />
+          </Button>
+          <Button onClick={() => moveTaskDown(index)}>
+            <MdArrowDropDown />
+          </Button>
           <Button onClick={() => setIsEditing(true)}>
             <MdEdit />
           </Button>

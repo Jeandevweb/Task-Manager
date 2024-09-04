@@ -23,9 +23,10 @@ const TaskContainer = () => {
       <TaskCreateForm tasks={tasks} setTasks={setTasks} />
 
       <List>
-        {tasks.map((task) => {
+        {tasks.map((task, index) => {
           return (
             <TaskItem
+              index={index}
               key={task.id}
               task={task}
               tasks={tasks}
