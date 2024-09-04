@@ -102,6 +102,8 @@ const TaskItem = ({ task, tasks, setTasks, index }) => {
         />
       ) : (
         <Checkbox
+          isChecked={task.completed}
+          textDecoration={task.completed ? "line-through" : "none"}
           onChange={(e) => {
             toggleTodo(task.id, e.target.checked);
           }}
