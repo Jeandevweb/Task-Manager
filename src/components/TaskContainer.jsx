@@ -1,5 +1,16 @@
-import { Box, Button, FormControl, Input, List, ListItem, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  IconButton,
+  Input,
+  List,
+  ListItem,
+  Text,
+} from "@chakra-ui/react";
 import { useState } from "react";
+import { MdDelete } from "react-icons/md";
 
 const TaskContainer = () => {
   const [newTask, setNewTask] = useState("");
@@ -10,7 +21,8 @@ const TaskContainer = () => {
     name: newTask,
     completed: false,
     subTask: [],
-  };
+    };
+    console.log(tasks)
 
   /**
    * Function to create new task
@@ -22,10 +34,19 @@ const TaskContainer = () => {
       setTasks((prevTask) => {
         return [...prevTask, createTask];
       });
-      }
-      setNewTask("");
+    }
+    setNewTask("");
   }
 
+  /**
+   * Function to create new task
+   * @param id current id of the task
+   */
+  function deleteTask(id) {
+    setTasks((prevTask) => {
+      return prevTask.filter((task) => task.id !== id);
+    });
+  }
   return (
     <Box
       width="50%"
@@ -38,25 +59,28 @@ const TaskContainer = () => {
       transform="translate(-50%, -50%)"
     >
       <Text textAlign="center"> Task Manager </Text>
-      <FormControl display="flex" >
+      <FormControl display="flex">
         <Input
           type="text"
           placeholder="Add a new task"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
         />
-        <Button
-          type="submit"
-        
-          onClick={createNewTask}
-        >
+        <Button type="submit" onClick={createNewTask}>
           Add Task
         </Button>
       </FormControl>
 
       <List>
         {tasks.map((task) => {
-          return <ListItem key={task.id}>{task.name}</ListItem>;
+          return (
+            <ListItem key={task.id}>
+              <Checkbox>{task.name}</Checkbox>
+              <Button onClick={() => deleteTask(task.id)}>
+                <MdDelete />
+              </Button>
+            </ListItem>
+          );
         })}
       </List>
     </Box>
