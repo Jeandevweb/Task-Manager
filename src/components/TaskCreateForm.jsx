@@ -3,9 +3,9 @@ import { useState } from "react";
 
 import { UseToast } from "../hooks/useToast";
 
-const TaskCreateForm = ({ setTasks }) => {
-    const [newTask, setNewTask] = useState("");
-    const {toastInfo} = UseToast()
+const TaskCreateForm = ({ tasks, setTasks }) => {
+  const [newTask, setNewTask] = useState("");
+  const { toastInfo } = UseToast();
 
   const createTask = {
     id: Date.now(),
@@ -20,12 +20,17 @@ const TaskCreateForm = ({ setTasks }) => {
    */
   function createNewTask(e) {
     e.preventDefault();
+    const insertRandomly = Math.floor(Math.random() * (tasks.length + 1));
+
+    const newTaskArray = [
+      ...tasks.slice(0, insertRandomly),
+      createTask,
+      ...tasks.slice(insertRandomly),
+    ];
     if (newTask.trim() !== "") {
-      setTasks((prevTask) => {
-        return [...prevTask, createTask];
-      });
-      }
-      toastInfo(`${newTask} a été créé`, "top", "success", 3000);
+      setTasks(newTaskArray);
+    }
+    toastInfo(`${newTask} a été créé`, "top", "success", 3000);
     setNewTask("");
   }
   return (

@@ -20,8 +20,7 @@ const TaskContainer = () => {
       left="50%"
       transform="translate(-50%, -50%)"
     >
-
-      <TaskCreateForm setTasks={setTasks} />
+      <TaskCreateForm tasks={tasks} setTasks={setTasks} />
 
       <List>
         {tasks.map((task) => {
