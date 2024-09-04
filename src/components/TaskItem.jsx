@@ -1,20 +1,14 @@
-import {
-  Button,
-  Checkbox,
-  Input,
-  ListItem,
-} from "@chakra-ui/react";
+import { Button, Checkbox, Input, ListItem } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdDelete, MdEdit, MdCancel, MdOutlineSave } from "react-icons/md";
 
-
-const TaskItem = ({task, tasks, setTasks}) => {
+const TaskItem = ({ task, tasks, setTasks }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(task.name);
 
   /**
    * Function to create new task
-   * @param id current id of the task
+   * @param {number} id current id of the task
    */
   function deleteTask(id) {
     setTasks((prevTask) => {
@@ -24,11 +18,10 @@ const TaskItem = ({task, tasks, setTasks}) => {
 
   /**
    * Function to edit current task
-   * @param id current id of the task
-   * @param newname enter by the user
+   * @param {number} id current id of the task
+   * @param {string} newname enter by the user
    */
   function editTask(id, newName) {
-    //partie a faire en premier, ensuite rajouter les sous taches
     const editedTaskList = tasks.map((task) => {
       if (id === task.id) {
         return { ...task, name: newName };
@@ -38,6 +31,26 @@ const TaskItem = ({task, tasks, setTasks}) => {
     setTasks(editedTaskList);
     setIsEditing(false);
   }
+
+  /**
+   * Function to toggle if task complete or not
+   * @param {number} id current id of the task
+   * @param {boolean} completed toggle completed todo
+   */
+  function toggleTodo(id, completed) {
+    setTasks((prevTask) => {
+      return prevTask.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed,
+          };
+        }
+        return todo;
+      });
+    });
+  }
+
   return (
     <ListItem key={task.id} display="flex">
       {isEditing ? (
@@ -47,7 +60,9 @@ const TaskItem = ({task, tasks, setTasks}) => {
           onChange={(e) => setNewName(e.target.value)}
         />
       ) : (
-        <Checkbox>{task.name}</Checkbox>
+        <Checkbox onChange={(e) => toggleTodo(task.id, e.target.checked)}>
+          {task.name}
+        </Checkbox>
       )}
       {isEditing ? (
         <>
@@ -59,14 +74,15 @@ const TaskItem = ({task, tasks, setTasks}) => {
           </Button>
         </>
       ) : (
-        <Button onClick={() => setIsEditing(true)}>
-          <MdEdit />
-        </Button>
+        <>
+          <Button onClick={() => setIsEditing(true)}>
+            <MdEdit />
+          </Button>
+          <Button onClick={() => deleteTask(task.id)}>
+            <MdDelete />
+          </Button>
+        </>
       )}
-
-      <Button onClick={() => deleteTask(task.id)}>
-        <MdDelete />
-      </Button>
     </ListItem>
   );
 };
