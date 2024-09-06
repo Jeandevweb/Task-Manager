@@ -5,15 +5,8 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import {
-  MdDelete,
-  MdEdit,
-  MdCancel,
-  MdOutlineSave,
-  MdArrowDropUp,
-  MdArrowDropDown,
-  MdOutlineMoreVert,
-} from "react-icons/md";
+
+import * as Icons from "../../../icons/reactIcons";
 import { useTaskItem } from "./../TaskItem/useTaskItem";
 
 const MenuActions = ({
@@ -32,17 +25,19 @@ const MenuActions = ({
 
   return (
     <Menu>
-      <MenuButton as={IconButton} icon={<MdOutlineMoreVert />} ml="2" />
+      <MenuButton as={IconButton} icon={<Icons.MdOutlineMoreVert />} ml="2" />
       <MenuList>
         {isEditing ? (
           <>
-            <MenuItem icon={<MdCancel />} onClick={() => setIsEditing(false)}>
+            <MenuItem
+              icon={<Icons.MdCancel />}
+              onClick={() => setIsEditing(false)}
+            >
               Cancel
             </MenuItem>
             <MenuItem
-              icon={<MdOutlineSave />}
+              icon={<Icons.MdOutlineSave />}
               onClick={() => {
-                console.log("clcik");
                 editTask(task.id, newName, tasks);
                 setIsEditing(false);
               }}
@@ -53,23 +48,29 @@ const MenuActions = ({
         ) : (
           <>
             <MenuItem
-              icon={<MdArrowDropUp />}
+              icon={<Icons.MdArrowDropUp />}
               onClick={() => moveTaskUp(index, tasks)}
               isDisabled={index === 0}
             >
-              Move Up
+              Move Task Up
             </MenuItem>
             <MenuItem
-              icon={<MdArrowDropDown />}
+              icon={<Icons.MdArrowDropDown />}
               onClick={() => moveTaskDown(index, tasks)}
             >
-              Move Down
+              Move Task Down
             </MenuItem>
-            <MenuItem icon={<MdEdit />} onClick={() => setIsEditing(true)}>
-              Edit
+            <MenuItem
+              icon={<Icons.MdEdit />}
+              onClick={() => setIsEditing(true)}
+            >
+              Edit Task
             </MenuItem>
-            <MenuItem icon={<MdDelete />} onClick={() => deleteTask(task.id)}>
-              Delete
+            <MenuItem
+              icon={<Icons.MdDelete />}
+              onClick={() => deleteTask(task.id)}
+            >
+              Delete Task
             </MenuItem>
           </>
         )}
