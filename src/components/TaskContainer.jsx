@@ -1,23 +1,16 @@
-import { Box, List, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import TaskItem from "./TaskItem";
 import TaskCreateForm from "./Form/TaskCreateForm";
 
 import TaskControls from "./TaskControls/TaskControls";
+import Tasklist from "./Task/TaskList/Tasklist";
 
 const TaskContainer = () => {
   const [tasks, setTasks] = useState([]);
   const [filterTask, setFilterTask] = useState("all");
 
-
-  const filteredTasks = tasks?.filter((task) => {
-    if (filterTask === "completed") return task.completed;
-    if (filterTask === "incomplete") return !task.completed;
-    return true;
-  });
-
   useEffect(() => {
-    console.log("new update");
+    if (!tasks) return;
   }, [tasks]);
 
   return (
@@ -32,24 +25,12 @@ const TaskContainer = () => {
       transform="translate(-50%, -50%)"
     >
       <TaskCreateForm tasks={tasks} setTasks={setTasks} />
-      <Text>{tasks.length === 0 && "Pas de tâches créés"}</Text>
       <Box margin={"20px 0 "}>
         <TaskControls tasks={tasks} setFilterTask={setFilterTask} />
       </Box>
+      <Text>{tasks.length === 0 && "Pas de tâches créés"}</Text>
 
-      <List>
-        {filteredTasks.map((task, index) => {
-          return (
-            <TaskItem
-              index={index}
-              key={task.id + Date.now()}
-              task={task}
-              tasks={tasks}
-              setTasks={setTasks}
-            />
-          );
-        })}
-      </List>
+      <Tasklist tasks={tasks} setTasks={setTasks} filterTask={filterTask} />
     </Box>
   );
 };

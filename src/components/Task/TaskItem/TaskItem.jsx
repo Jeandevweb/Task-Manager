@@ -9,7 +9,7 @@ import {
   MdArrowDropDown,
   MdOutlineMoreVert,
 } from "react-icons/md";
-import { UseToast } from "../hooks/useToast";
+import { UseToast } from "../../../hooks/useToast";
 
 const TaskItem = ({ task, tasks, setTasks, index }) => {
   const [isEditing, setIsEditing] = useState(false);
