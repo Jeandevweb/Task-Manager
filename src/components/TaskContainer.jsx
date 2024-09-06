@@ -1,7 +1,7 @@
 import { Box, Button, Input, List } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
-import TaskCreateForm from "./TaskCreateForm";
+import TaskCreateForm from "./Form/TaskCreateForm";
 import TaskFilterMenu from "./TaskFilterMenu";
 
 import { UseToast } from "../hooks/useToast";
@@ -95,6 +95,7 @@ const TaskContainer = () => {
         />
       </Box>
 
+       {tasks.length === 0 && "Pas de tâches créés"}
       <List>
         {filteredTasks.map((task, index) => {
           return (
