@@ -1,9 +1,4 @@
-import {
-  Box,
-  Button,
-  Input,
-  List,
-} from "@chakra-ui/react";
+import { Box, Button, Input, List } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
 import TaskCreateForm from "./TaskCreateForm";
@@ -83,15 +78,24 @@ const TaskContainer = () => {
       transform="translate(-50%, -50%)"
     >
       <TaskCreateForm tasks={tasks} setTasks={setTasks} />
-      <TaskFilterMenu tasks={tasks} setFilterTask={setFilterTask} />
-      <Button onClick={() => downloadJsonFile(tasks)}>Download task</Button>
-      <input
-        type="file"
-        accept=".json"
-        className="file"
-        onChange={jsonFileUpload}
-      />
-      <List >
+
+      <Box margin={"20px 0 "}>
+        <TaskFilterMenu tasks={tasks} setFilterTask={setFilterTask} />
+        <Button onClick={() => downloadJsonFile(tasks)}>Download task</Button>
+        <Button onClick={() => document.querySelector(".file").click()}>
+          {" "}
+          Télécharger un fichier json
+        </Button>
+        <Input
+          display="none"
+          type="file"
+          accept=".json"
+          className="file"
+          onChange={jsonFileUpload}
+        />
+      </Box>
+
+      <List>
         {filteredTasks.map((task, index) => {
           return (
             <TaskItem
