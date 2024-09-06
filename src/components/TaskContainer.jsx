@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Divider, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import TaskCreateForm from "./Form/TaskCreateForm";
 
@@ -16,22 +16,26 @@ const TaskContainer = () => {
   return (
     <Box
       width="50%"
-      border="1px solid"
       height="80%"
       margin="0 auto"
       position="fixed"
       top="50%"
       left="50%"
       transform="translate(-50%, -50%)"
+      bg="#34495e"
+      borderRadius="20px"
+      padding="10px 15px"
+      color="#FFFFFF"
+      fontFamily="helvetica"
     >
       <TaskCreateForm tasks={tasks} setTasks={setTasks} />
-      <Box margin={"20px 0 "}>
-        <TaskControls
-          tasks={tasks}
-          setFilterTask={setFilterTask}
-          setTasks={setTasks}
-        />
-      </Box>
+      <Divider />
+      <TaskControls
+        tasks={tasks}
+        setFilterTask={setFilterTask}
+        setTasks={setTasks}
+        filterTask={filterTask}
+      />
       <Text>{tasks.length === 0 && "Pas de tâches créés"}</Text>
 
       <Tasklist tasks={tasks} setTasks={setTasks} filterTask={filterTask} />

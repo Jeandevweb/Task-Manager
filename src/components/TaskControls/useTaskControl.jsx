@@ -5,9 +5,9 @@ export const useTaskControl = (tasks, setTasks) => {
 
   //Filter task to know complete or not
   const filtersForButton = [
-    { label: "All", value: "all" },
-    { label: "Completed", value: "completed" },
-    { label: "Incomplete", value: "incomplete" },
+    { label: "All Tasks", value: "all" },
+    { label: "Completed Tasks", value: "completed" },
+    { label: "Incomplete Tasks", value: "incomplete" },
   ];
 
   /**

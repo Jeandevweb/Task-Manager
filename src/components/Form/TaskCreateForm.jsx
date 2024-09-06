@@ -1,20 +1,18 @@
-import { Button, FormControl, Input, Text } from "@chakra-ui/react";
+import { Button, FormControl, Input } from "@chakra-ui/react";
 import { useCreateTask } from "../Form/useCreateTask";
 
 const TaskCreateForm = ({ tasks, setTasks }) => {
-  const { createNewTask, handleChangeNewTask, newTask } = useCreateTask(
+  const { createNewTask, handleChangeNewTask, newTaskName } = useCreateTask(
     tasks,
     setTasks
   );
-
   return (
     <>
-      <Text textAlign="center"> Task Manager </Text>
-      <FormControl display="flex">
+      <FormControl display="flex" gap="5" padding="10px" margin="20px 0">
         <Input
           type="text"
           placeholder="Add a new task"
-          value={newTask}
+          value={newTaskName}
           onChange={handleChangeNewTask}
         />
         <Button type="submit" onClick={createNewTask}>

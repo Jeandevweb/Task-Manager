@@ -2,17 +2,16 @@ import { useState } from "react";
 import { UseToast } from "../../hooks/useToast";
 
 export const useCreateTask = (tasks, setTasks) => {
-  const [newTask, setNewTask] = useState("");
+  const [newTaskName, setNewTask] = useState("");
   const { toastInfo } = UseToast();
 
   //Initial task empty
   const createTask = {
     id: Date.now(),
-    name: newTask,
+    name: newTaskName,
     completed: false,
     subTask: [],
   };
-
   /**
    * Function to create new task
    * @param event to prevent submit form
@@ -26,14 +25,14 @@ export const useCreateTask = (tasks, setTasks) => {
       createTask,
       ...tasks.slice(insertRandomly),
     ];
-    if (newTask.trim() === "") {
+    if (newTaskName.trim() === "") {
       toastInfo("Value vide", "top", "warning", 3000);
       return;
     } else {
       setTasks(newTaskArray);
+      setNewTask("");
     }
-    toastInfo(`${newTask} a été créé`, "top", "success", 3000);
-    setNewTask("");
+    toastInfo(`${newTaskName} a été créé`, "top", "success", 3000);
   }
 
     //Handle change new task
@@ -43,6 +42,6 @@ export const useCreateTask = (tasks, setTasks) => {
   return {
     createNewTask,
     handleChangeNewTask,
-    newTask,
+    newTaskName,
   };
 };

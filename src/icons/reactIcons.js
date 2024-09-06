@@ -6,6 +6,8 @@ import {
   MdArrowDropUp,
   MdArrowDropDown,
   MdOutlineMoreVert,
+  MdUploadFile,
+  MdCloudDownload,
 } from "react-icons/md";
 
 export {
@@ -16,4 +18,6 @@ export {
   MdArrowDropUp,
   MdArrowDropDown,
   MdOutlineMoreVert,
+  MdUploadFile,
+  MdCloudDownload,
 };
