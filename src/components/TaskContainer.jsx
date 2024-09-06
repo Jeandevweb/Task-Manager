@@ -7,7 +7,12 @@ import Tasklist from "./Task/TaskList/Tasklist";
 import { useCreateTask } from "./Form/useCreateTask";
 
 const TaskContainer = () => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const local = localStorage.getItem("ITEMS");
+    if (local === null) return [];
+
+    return JSON.parse(local);
+  });
   const [filterTask, setFilterTask] = useState("all");
 
   const { createNewTask, handleChangeNewTask, newTaskName, createSubTask } =
@@ -15,18 +20,10 @@ const TaskContainer = () => {
 
   useEffect(() => {
     if (!tasks) return;
+     localStorage.setItem("ITEMS", JSON.stringify(tasks));
   }, [tasks]);
 
-   const scrollbar = {
-     "::-webkit-scrollbar": {
-       width: "8px",
-       height: "8px",
-     },
-     "&::-webkit-scrollbar-thumb": {
-       background: "rgba(128,128,128,0.4)",
-       borderRadius: "24px",
-     },
-   };
+   
 
   return (
     <Box
@@ -43,7 +40,16 @@ const TaskContainer = () => {
       color="#FFFFFF"
       fontFamily="helvetica"
       overflowY="scroll"
-      sx={scrollbar}
+      sx={{
+        "::-webkit-scrollbar": {
+          width: "8px",
+          height: "8px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "rgba(128,128,128,0.4)",
+          borderRadius: "24px",
+        },
+      }}
     >
       <TaskCreateForm
         createNewTask={createNewTask}
