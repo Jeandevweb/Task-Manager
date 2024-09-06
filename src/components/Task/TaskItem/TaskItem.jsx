@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Checkbox, Input, ListItem } from "@chakra-ui/react";
+import { Box, Checkbox, Divider, Input, ListItem } from "@chakra-ui/react";
 
 import MenuActions from "./MenuActions";
 import { useTaskItem } from "./../TaskItem/useTaskItem";
@@ -17,8 +17,23 @@ const TaskItem = ({ task, tasks, setTasks, index, createSubTask }) => {
   } = useTaskItem(setTasks, task);
 
   return (
-    <>
-      <ListItem key={task.id + Date.now()} display="flex">
+    <Box
+      borderRadius="10px"
+      bg="#e0ebeb"
+      color="black"
+      padding="5px"
+    >
+      <ListItem
+        key={task.id + Date.now()}
+        justifyContent="space-between"
+        display="flex"
+        width="100%"
+        padding="15px"
+        border="1px solid white"
+        borderRadius="10px"
+        background="rgba(127, 199, 235, 0.2)"
+        margin="2px 0"
+      >
         {isEditing ? (
           <Input
             type="text"
@@ -49,7 +64,7 @@ const TaskItem = ({ task, tasks, setTasks, index, createSubTask }) => {
         />
       </ListItem>
       {task.subTasks && (
-        <Box  paddingLeft= "20px">
+        <Box paddingLeft="20px">
           {task.subTasks.map(
             (subTask) => (
               console.log(subTask),
@@ -69,7 +84,7 @@ const TaskItem = ({ task, tasks, setTasks, index, createSubTask }) => {
           )}
         </Box>
       )}
-    </>
+    </Box>
   );
 };
 

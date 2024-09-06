@@ -25,8 +25,14 @@ const MenuActions = ({
   return (
     <>
       <Menu>
-        <MenuButton as={IconButton} icon={<Icons.MdOutlineMoreVert />} ml="2" />
-        <MenuList>
+        <MenuButton
+          as={IconButton}
+          icon={<Icons.MdOutlineMoreVert />}
+          bg="#34495e"
+          color="white"
+          ml="2"
+        />
+        <MenuList color="black" fontFamily={"helvetica"}>
           {isEditing ? (
             <>
               <MenuItem
@@ -76,7 +82,7 @@ const MenuActions = ({
                 icon={<Icons.MdDelete />}
                 onClick={() => createSubTask(task.id)}
               >
-                addSubTask
+                Add SubTask
               </MenuItem>
             </>
           )}

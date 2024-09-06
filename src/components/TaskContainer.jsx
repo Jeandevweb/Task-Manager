@@ -17,9 +17,20 @@ const TaskContainer = () => {
     if (!tasks) return;
   }, [tasks]);
 
+   const scrollbar = {
+     "::-webkit-scrollbar": {
+       width: "8px",
+       height: "8px",
+     },
+     "&::-webkit-scrollbar-thumb": {
+       background: "rgba(128,128,128,0.4)",
+       borderRadius: "24px",
+     },
+   };
+
   return (
     <Box
-      width="50%"
+      width="65%"
       height="80%"
       margin="0 auto"
       position="fixed"
@@ -31,6 +42,8 @@ const TaskContainer = () => {
       padding="10px 15px"
       color="#FFFFFF"
       fontFamily="helvetica"
+      overflowY="scroll"
+      sx={scrollbar}
     >
       <TaskCreateForm
         createNewTask={createNewTask}

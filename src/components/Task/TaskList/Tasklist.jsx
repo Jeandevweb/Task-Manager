@@ -1,4 +1,4 @@
-import { List } from "@chakra-ui/react";
+import { Box, List } from "@chakra-ui/react";
 import TaskItem from "../TaskItem/TaskItem";
 import { useTaskList } from "./useTaskList";
 
@@ -9,14 +9,16 @@ const Tasklist = ({ tasks, setTasks, filterTask, createSubTask }) => {
     <List>
       {filteredTasks(tasks, filterTask).map((task, index) => {
         return (
-          <TaskItem
-            index={index}
-            key={task.id + Date.now()}
-            task={task}
-            tasks={tasks}
-            setTasks={setTasks}
-            createSubTask={createSubTask}
-          />
+          <Box key={index} margin="10px 0">
+            <TaskItem
+              index={index}
+              key={task.id + Date.now()}
+              task={task}
+              tasks={tasks}
+              setTasks={setTasks}
+              createSubTask={createSubTask}
+            />
+          </Box>
         );
       })}
     </List>
