@@ -1,12 +1,20 @@
 import { useState } from "react";
-import { Checkbox, Input, ListItem } from "@chakra-ui/react";
+import { Box, Checkbox, Input, ListItem } from "@chakra-ui/react";
 
 import MenuActions from "./MenuActions";
 import { useTaskItem } from "./../TaskItem/useTaskItem";
 
-const TaskItem = ({ task, tasks, setTasks, index }) => {
+const TaskItem = ({ task, tasks, setTasks, index, createSubTask }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const { toggleTodo, newName, setNewName } = useTaskItem(setTasks, task);
+  const {
+    toggleTodo,
+    newName,
+    setNewName,
+    deleteTask,
+    editTask,
+    moveTaskUp,
+    moveTaskDown,
+  } = useTaskItem(setTasks, task);
 
   return (
     <>
@@ -37,8 +45,30 @@ const TaskItem = ({ task, tasks, setTasks, index }) => {
           setIsEditing={setIsEditing}
           isEditing={isEditing}
           newName={newName}
+          createSubTask={createSubTask}
         />
       </ListItem>
+      {task.subTasks && (
+        <Box  paddingLeft= "20px">
+          {task.subTasks.map(
+            (subTask) => (
+              console.log(subTask),
+              (
+                <TaskItem
+                  key={subTask.id}
+                  task={subTask}
+                  toggleTodo={toggleTodo}
+                  editTask={editTask}
+                  deleteTask={deleteTask}
+                  createSubTask={createSubTask}
+                  moveTaskUp={moveTaskUp}
+                  moveTaskDown={moveTaskDown}
+                />
+              )
+            )
+          )}
+        </Box>
+      )}
     </>
   );
 };

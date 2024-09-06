@@ -1,11 +1,10 @@
 import { Button, FormControl, Input } from "@chakra-ui/react";
-import { useCreateTask } from "../Form/useCreateTask";
 
-const TaskCreateForm = ({ tasks, setTasks }) => {
-  const { createNewTask, handleChangeNewTask, newTaskName } = useCreateTask(
-    tasks,
-    setTasks
-  );
+const TaskCreateForm = ({
+  newTaskName,
+  handleChangeNewTask,
+  createNewTask,
+}) => {
   return (
     <>
       <FormControl display="flex" gap="5" padding="10px" margin="20px 0">
@@ -15,7 +14,7 @@ const TaskCreateForm = ({ tasks, setTasks }) => {
           value={newTaskName}
           onChange={handleChangeNewTask}
         />
-        <Button type="submit" onClick={createNewTask}>
+        <Button type="submit" onClick={() => createNewTask(newTaskName)}>
           Add Task
         </Button>
       </FormControl>

@@ -2,7 +2,7 @@ import { List } from "@chakra-ui/react";
 import TaskItem from "../TaskItem/TaskItem";
 import { useTaskList } from "./useTaskList";
 
-const Tasklist = ({ tasks, setTasks, filterTask }) => {
+const Tasklist = ({ tasks, setTasks, filterTask, createSubTask }) => {
   const { filteredTasks } = useTaskList();
 
   return (
@@ -15,6 +15,7 @@ const Tasklist = ({ tasks, setTasks, filterTask }) => {
             task={task}
             tasks={tasks}
             setTasks={setTasks}
+            createSubTask={createSubTask}
           />
         );
       })}
