@@ -1,9 +1,10 @@
 import {
   Box,
   Button,
+  Input,
   List,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
 import TaskCreateForm from "./TaskCreateForm";
 import TaskFilterMenu from "./TaskFilterMenu";
@@ -16,7 +17,7 @@ const TaskContainer = () => {
 
   const { toastInfo } = UseToast();
 
-  const filteredTasks = tasks.filter((task) => {
+  const filteredTasks = tasks?.filter((task) => {
     if (filterTask === "completed") return task.completed;
     if (filterTask === "incomplete") return !task.completed;
     return true;
@@ -46,6 +47,30 @@ const TaskContainer = () => {
     URL.revokeObjectURL(url);
   };
 
+  /**
+   * Function to upload new tasks
+   * @param {event} element list of tasks created
+   */
+  const jsonFileUpload = (e) => {
+    const fileReader = new FileReader();
+    fileReader.readAsText(e.target.files[0], "UTF-8");
+    fileReader.onload = (e) => {
+      const data = JSON.parse(e.target.result);
+      setTasks([...tasks, ...data]);
+      if (data.length === 0) {
+        toastInfo("Votre fichier téléchargé est vide", "top", "warning", 3000);
+      } else {
+        toastInfo("Fichier télécharger avec succès", "top", "success", 3000);
+      }
+    };
+    let resetFile = document.querySelector(".file");
+    resetFile.value = "";
+  };
+
+  useEffect(() => {
+    console.log("new update");
+  }, [tasks]);
+
   return (
     <Box
       width="50%"
@@ -60,12 +85,18 @@ const TaskContainer = () => {
       <TaskCreateForm tasks={tasks} setTasks={setTasks} />
       <TaskFilterMenu tasks={tasks} setFilterTask={setFilterTask} />
       <Button onClick={() => downloadJsonFile(tasks)}>Download task</Button>
-      <List>
+      <input
+        type="file"
+        accept=".json"
+        className="file"
+        onChange={jsonFileUpload}
+      />
+      <List >
         {filteredTasks.map((task, index) => {
           return (
             <TaskItem
               index={index}
-              key={task.id}
+              key={task.id + Date.now()}
               task={task}
               tasks={tasks}
               setTasks={setTasks}

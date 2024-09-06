@@ -94,7 +94,7 @@ const TaskItem = ({ task, tasks, setTasks, index }) => {
   }
 
   return (
-    <ListItem key={task.id} display="flex">
+    <ListItem key={task.id + Date.now()} display="flex">
       {isEditing ? (
         <Input
           type="text"
@@ -155,34 +155,6 @@ const TaskItem = ({ task, tasks, setTasks, index }) => {
           )}
         </MenuList>
       </Menu>
-      {/* {isEditing ? (
-        <>
-          <Button onClick={() => setIsEditing(false)}>
-            <MdCancel />
-          </Button>
-          <Button onClick={() => editTask(task.id, newName)}>
-            <MdOutlineSave />
-          </Button>
-        </>
-      ) : (
-        <>
-          <Button
-            isDisabled={tasks[0] === index ? true : false}
-            onClick={() => moveTaskUp(index)}
-          >
-            <MdArrowDropUp />
-          </Button>
-          <Button onClick={() => moveTaskDown(index)}>
-            <MdArrowDropDown />
-          </Button>
-          <Button onClick={() => setIsEditing(true)}>
-            <MdEdit />
-          </Button>
-          <Button onClick={() => deleteTask(task.id)}>
-            <MdDelete />
-          </Button>
-        </>
-      )} */}
     </ListItem>
   );
 };
