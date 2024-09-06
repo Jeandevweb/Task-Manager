@@ -1,4 +1,4 @@
-import { Button, Checkbox, Input, ListItem } from "@chakra-ui/react";
+import { Button, Checkbox, IconButton, Input, ListItem, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { useState } from "react";
 import {
   MdDelete,
@@ -7,6 +7,7 @@ import {
   MdOutlineSave,
   MdArrowDropUp,
   MdArrowDropDown,
+  MdOutlineMoreVert,
 } from "react-icons/md";
 import { UseToast } from "../hooks/useToast";
 
@@ -111,7 +112,50 @@ const TaskItem = ({ task, tasks, setTasks, index }) => {
           {task.name}
         </Checkbox>
       )}
-      {isEditing ? (
+      <Menu>
+        <MenuButton as={IconButton} icon={<MdOutlineMoreVert />} ml="2" />
+        <MenuList>
+          {isEditing ? (
+            <>
+              <MenuItem icon={<MdCancel />} onClick={() => setIsEditing(false)}>
+                Cancel
+              </MenuItem>
+              <MenuItem
+                icon={<MdOutlineSave />}
+                onClick={() => {
+                  editTask(task.id, newName);
+                  setIsEditing(false);
+                }}
+              >
+                Save
+              </MenuItem>
+            </>
+          ) : (
+            <>
+              <MenuItem
+                icon={<MdArrowDropUp />}
+                onClick={() => moveTaskUp(index)}
+                isDisabled={index === 0}
+              >
+                Move Up
+              </MenuItem>
+              <MenuItem
+                icon={<MdArrowDropDown />}
+                onClick={() => moveTaskDown(index)}
+              >
+                Move Down
+              </MenuItem>
+              <MenuItem icon={<MdEdit />} onClick={() => setIsEditing(true)}>
+                Edit
+              </MenuItem>
+              <MenuItem icon={<MdDelete />} onClick={() => deleteTask(task.id)}>
+                Delete
+              </MenuItem>
+            </>
+          )}
+        </MenuList>
+      </Menu>
+      {/* {isEditing ? (
         <>
           <Button onClick={() => setIsEditing(false)}>
             <MdCancel />
@@ -138,7 +182,7 @@ const TaskItem = ({ task, tasks, setTasks, index }) => {
             <MdDelete />
           </Button>
         </>
-      )}
+      )} */}
     </ListItem>
   );
 };
