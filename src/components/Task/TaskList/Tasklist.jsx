@@ -1,15 +1,13 @@
 import { List } from "@chakra-ui/react";
 import TaskItem from "../TaskItem/TaskItem";
 import { useTaskList } from "./useTaskList";
-const Tasklist = ({ tasks, setTasks, filterTask }) => {
 
-  const { filteredTasks } = useTaskList(tasks, filterTask);
-  
-  console.log(filteredTasks)
-  
+const Tasklist = ({ tasks, setTasks, filterTask }) => {
+  const { filteredTasks } = useTaskList();
+
   return (
     <List>
-      {filteredTasks.map((task, index) => {
+      {filteredTasks(tasks, filterTask).map((task, index) => {
         return (
           <TaskItem
             index={index}

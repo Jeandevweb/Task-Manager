@@ -26,7 +26,11 @@ const TaskContainer = () => {
     >
       <TaskCreateForm tasks={tasks} setTasks={setTasks} />
       <Box margin={"20px 0 "}>
-        <TaskControls tasks={tasks} setFilterTask={setFilterTask} />
+        <TaskControls
+          tasks={tasks}
+          setFilterTask={setFilterTask}
+          setTasks={setTasks}
+        />
       </Box>
       <Text>{tasks.length === 0 && "Pas de tâches créés"}</Text>
 
