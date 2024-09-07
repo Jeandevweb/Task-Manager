@@ -22,7 +22,7 @@ const MenuActions = ({
   createSubTask,
 }) => {
   
-  const { setTasks, tasks } = useContext(TaskContext);
+  const { setTasks, tasks, filterTask } = useContext(TaskContext);
 
   return (
     <>
@@ -33,6 +33,7 @@ const MenuActions = ({
           bg="#34495e"
           color="white"
           ml="2"
+          isDisabled={filterTask === "completed"}
         />
         <MenuList color="black" fontFamily={"helvetica"}>
           {isEditing ? (

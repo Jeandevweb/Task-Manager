@@ -17,12 +17,11 @@ const TaskItem = ({ task, index }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(task.name);
 
-  const { tasks, setTasks } = useContext(TaskContext);
+  const { tasks, setTasks, filterTask } = useContext(TaskContext);
 
   const { toastInfo } = UseToast();
 
   const { createSubTask } = useCreateTask();
-
 
   return (
     <Box borderRadius="10px" bg="#e0ebeb" color="black" padding="5px">
@@ -47,6 +46,7 @@ const TaskItem = ({ task, index }) => {
         ) : (
           <Checkbox
             isChecked={task.completed}
+            isDisabled={filterTask === "completed"}
             textDecoration={task.completed ? "line-through" : "none"}
             onChange={(e) => {
               toggleTodo(task.id, e.target.checked, tasks, setTasks, toastInfo);

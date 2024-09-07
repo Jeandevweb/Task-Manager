@@ -53,7 +53,7 @@ export const useCreateTask = () => {
   }
 
   const createSubTask = (id) => {
-    const subTaskName = prompt("Enter subtask name");
+    const subTaskName = prompt("Entrez le nom de la sous tâche");
     if (subTaskName) {
       createNewTask(subTaskName, id);
       setNewTask("");
