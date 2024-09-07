@@ -65,3 +65,7 @@ Liste les principales fonctionnalités de l'application :
 - Cliquez sur "Importer JSON" pour charger des tâches depuis un fichier JSON.
 
 ---
+
+## Démo
+
+- https://thetaskmanagement.netlify.app/
