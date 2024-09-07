@@ -15,21 +15,8 @@ export const useTaskItem = (setTasks, task) => {
       return prevTask.filter((task) => task.id !== id);
     });
   }
+  
 
-  /**
-   * Function to edit current task
-   * @param {number} id current id of the task
-   * @param {string} newname enter by the user
-   */
-  function editTask(id, name, element) {
-    const editedTaskList = element.map((task) => {
-      if (id === task.id) {
-        return { ...task, name: name };
-      }
-      return task;
-    });
-    setTasks(editedTaskList);
-  }
 
   /**
    * Function to toggle if task complete or not
@@ -83,7 +70,6 @@ export const useTaskItem = (setTasks, task) => {
   }
   return {
     deleteTask,
-    editTask,
     toggleTodo,
     moveTaskUp,
     moveTaskDown,

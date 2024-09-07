@@ -23,6 +23,7 @@ export const useCreateTask = (tasks, setTasks) => {
       completed: false,
       subTasks: [],
     };
+    
     // Insérer aléatoirement dans le tableau des tâches
     const insertRandomly = Math.floor(Math.random() * (tasks.length + 1));
     const newTaskArray = [

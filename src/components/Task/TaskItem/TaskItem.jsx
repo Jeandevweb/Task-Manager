@@ -1,34 +1,37 @@
 import { useState } from "react";
-import { Box, Checkbox, Divider, Input, ListItem } from "@chakra-ui/react";
+import { Box, Checkbox,  Input, ListItem } from "@chakra-ui/react";
 
 import MenuActions from "./MenuActions";
 import { useTaskItem } from "./../TaskItem/useTaskItem";
 
-const TaskItem = ({ task, tasks, setTasks, index, createSubTask }) => {
+import { editTask } from "../../../constants/crudFunctions";
+
+
+const TaskItem = ({
+  task,
+  tasks,
+  setTasks,
+  index,
+  createSubTask,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const {
     toggleTodo,
     newName,
     setNewName,
     deleteTask,
-    editTask,
     moveTaskUp,
     moveTaskDown,
   } = useTaskItem(setTasks, task);
 
   return (
-    <Box
-      borderRadius="10px"
-      bg="#e0ebeb"
-      color="black"
-      padding="5px"
-    >
+    <Box borderRadius="10px" bg="#e0ebeb" color="black" padding="5px">
       <ListItem
         key={task.id + Date.now()}
         justifyContent="space-between"
         display="flex"
         width="100%"
-        padding="15px"
+        padding="5px 10px"
         border="1px solid white"
         borderRadius="10px"
         background="rgba(127, 199, 235, 0.2)"
@@ -61,27 +64,25 @@ const TaskItem = ({ task, tasks, setTasks, index, createSubTask }) => {
           isEditing={isEditing}
           newName={newName}
           createSubTask={createSubTask}
+          editTask={editTask}
         />
       </ListItem>
       {task.subTasks && (
         <Box paddingLeft="20px">
-          {task.subTasks.map(
-            (subTask) => (
-              console.log(subTask),
-              (
-                <TaskItem
-                  key={subTask.id}
-                  task={subTask}
-                  toggleTodo={toggleTodo}
-                  editTask={editTask}
-                  deleteTask={deleteTask}
-                  createSubTask={createSubTask}
-                  moveTaskUp={moveTaskUp}
-                  moveTaskDown={moveTaskDown}
-                />
-              )
-            )
-          )}
+          {task.subTasks.map((subTask) => (
+            <TaskItem
+              key={subTask.id}
+              task={subTask}
+              toggleTodo={toggleTodo}
+              deleteTask={deleteTask}
+              createSubTask={createSubTask}
+              moveTaskUp={moveTaskUp}
+              moveTaskDown={moveTaskDown}
+              editTask={editTask}
+              tasks={tasks}
+              setTasks={setTasks}
+            />
+          ))}
         </Box>
       )}
     </Box>

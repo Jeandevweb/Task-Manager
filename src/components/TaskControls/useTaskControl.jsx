@@ -1,6 +1,6 @@
 import { UseToast } from "../../hooks/useToast";
 
-export const useTaskControl = (tasks, setTasks) => {
+export const useTaskControl = () => {
   const { toastInfo } = UseToast();
 
   //Filter task to know complete or not
@@ -38,7 +38,7 @@ export const useTaskControl = (tasks, setTasks) => {
    * Function to upload new tasks
    * @param {event} element list of tasks created
    */
-  const jsonFileUpload = (e) => {
+  const jsonFileUpload = (e,tasks, setTasks) => {
     const fileReader = new FileReader();
     fileReader.readAsText(e.target.files[0], "UTF-8");
     fileReader.onload = (e) => {

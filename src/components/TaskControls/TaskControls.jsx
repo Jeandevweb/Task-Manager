@@ -1,12 +1,10 @@
-import { Box, Button, Input, Tooltip} from "@chakra-ui/react";
+import { Box, Button, Input, Tooltip } from "@chakra-ui/react";
 import { useTaskControl } from "./useTaskControl";
-import * as Icons from "../../icons/reactIcons"
+import * as Icons from "../../icons/reactIcons";
 
-const TaskControls = ({ setFilterTask, tasks, filterTask }) => {
-  const { downloadJsonFile, jsonFileUpload, filtersForButton } = useTaskControl(
-    setFilterTask,
-    tasks
-  );
+const TaskControls = ({ setFilterTask, tasks, filterTask, setTasks }) => {
+  const { downloadJsonFile, jsonFileUpload, filtersForButton } =
+    useTaskControl();
 
   return (
     <Box display="flex" flexWrap="nowrap" margin="20px 0 50px">
@@ -29,32 +27,30 @@ const TaskControls = ({ setFilterTask, tasks, filterTask }) => {
       <Box w="20%">
         {/* Bouton pour télécharger les tâches */}
         <Tooltip label="télécharger votre liste de tâches">
-
-        <Button
-          marginRight="10px"
-          size="sm"
-          onClick={() => downloadJsonFile(tasks)}
+          <Button
+            marginRight="10px"
+            size="sm"
+            onClick={() => downloadJsonFile(tasks)}
           >
-          <Icons.MdCloudDownload />
-        </Button>
-          </Tooltip>
+            <Icons.MdCloudDownload />
+          </Button>
+        </Tooltip>
 
         {/* Bouton pour déclencher l'upload */}
         <Tooltip label="ajouter une liste des tâches">
-          
-        <Button
-          size="sm"
-          onClick={() => document.querySelector(".file").click()}
+          <Button
+            size="sm"
+            onClick={() => document.querySelector(".file").click()}
           >
-          <Icons.MdUploadFile />
-        </Button>
-          </Tooltip>
+            <Icons.MdUploadFile />
+          </Button>
+        </Tooltip>
         <Input
           display="none"
           type="file"
           accept=".json"
           className="file"
-          onChange={jsonFileUpload}
+          onChange={(e) => jsonFileUpload(e, tasks, setTasks)}
         />
       </Box>
     </Box>

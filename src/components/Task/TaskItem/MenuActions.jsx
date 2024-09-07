@@ -18,9 +18,9 @@ const MenuActions = ({
   isEditing,
   newName,
   createSubTask,
+  editTask,
 }) => {
-  const { deleteTask, editTask, moveTaskUp, moveTaskDown } =
-    useTaskItem(setTasks, task);
+  const { deleteTask, moveTaskUp, moveTaskDown } = useTaskItem(setTasks, task);
 
   return (
     <>
@@ -44,7 +44,7 @@ const MenuActions = ({
               <MenuItem
                 icon={<Icons.MdOutlineSave />}
                 onClick={() => {
-                  editTask(task.id, newName, tasks);
+                  editTask(task.id, newName, tasks, setTasks);
                   setIsEditing(false);
                 }}
               >
@@ -79,7 +79,7 @@ const MenuActions = ({
                 Delete Task
               </MenuItem>
               <MenuItem
-                icon={<Icons.MdDelete />}
+                icon={<Icons.MdAdd />}
                 onClick={() => createSubTask(task.id)}
               >
                 Add SubTask

@@ -8,6 +8,7 @@ import {
   MdOutlineMoreVert,
   MdUploadFile,
   MdCloudDownload,
+  MdAdd,
 } from "react-icons/md";
 
 export {
@@ -20,4 +21,5 @@ export {
   MdOutlineMoreVert,
   MdUploadFile,
   MdCloudDownload,
+  MdAdd,
 };
