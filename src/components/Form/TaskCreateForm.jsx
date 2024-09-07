@@ -7,7 +7,6 @@ const TaskCreateForm = () => {
   const { newTaskName } = useContext(TaskContext);
   const { createNewTask, handleChangeNewTask } = useCreateTask();
 
-
   return (
     <>
       <FormControl display="flex" gap="5" padding="10px" margin="20px 0">
@@ -16,8 +15,17 @@ const TaskCreateForm = () => {
           placeholder="Ajoutez une tâche"
           value={newTaskName}
           onChange={handleChangeNewTask}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              createNewTask(newTaskName);
+            }
+          }}
         />
-        <Button fontSize="sm" type="submit" onClick={() => createNewTask(newTaskName)}>
+        <Button
+          fontSize="sm"
+          type="submit"
+          onClick={() => createNewTask(newTaskName)}
+        >
           Ajoutez une tâche
         </Button>
       </FormControl>

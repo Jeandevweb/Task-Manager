@@ -42,6 +42,12 @@ const TaskItem = ({ task, index }) => {
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
             autoFocus
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                editTask(task.id, newName, tasks, setTasks);
+                setIsEditing(false);
+              }
+            }}
           />
         ) : (
           <Checkbox

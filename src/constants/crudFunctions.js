@@ -92,7 +92,7 @@ export function toggleTodo(id, completed, tasks, setter, toastInfo) {
   const task = tasks.find((task) => task.id === id);
   if (completed && task && task.completed) {
     toastInfo(`${task.name} a été complété`, "top", "success", 3000);
-  } else if (task.subTasks.length === 0 && !task.completed) {
+  } else if (task?.subTasks.length === 0 && !task.completed) {
     toastInfo(`${task.name} a été complété`, "top", "success", 3000);
   }
 }
