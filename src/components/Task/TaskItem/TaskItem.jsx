@@ -4,7 +4,12 @@ import { Box, Checkbox,  Input, ListItem } from "@chakra-ui/react";
 import MenuActions from "./MenuActions";
 import { useTaskItem } from "./../TaskItem/useTaskItem";
 
-import { editTask, deleteTask } from "../../../constants/crudFunctions";
+import {
+  editTask,
+  deleteTask,
+  toggleTodo,
+} from "../../../constants/crudFunctions";
+import { UseToast } from "../../../hooks/useToast";
 
 
 const TaskItem = ({
@@ -15,8 +20,9 @@ const TaskItem = ({
   createSubTask,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const { toastInfo } = UseToast();
+
   const {
-    toggleTodo,
     newName,
     setNewName,
     moveTaskUp,
@@ -48,7 +54,7 @@ const TaskItem = ({
             isChecked={task.completed}
             textDecoration={task.completed ? "line-through" : "none"}
             onChange={(e) => {
-              toggleTodo(task.id, e.target.checked);
+              toggleTodo(task.id, e.target.checked, tasks, setTasks, toastInfo);
             }}
           >
             {task.name}
@@ -73,7 +79,6 @@ const TaskItem = ({
             <TaskItem
               key={subTask.id}
               task={subTask}
-              toggleTodo={toggleTodo}
               deleteTask={deleteTask}
               createSubTask={createSubTask}
               moveTaskUp={moveTaskUp}

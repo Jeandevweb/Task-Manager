@@ -1,31 +1,8 @@
 import { useState } from "react";
-import { UseToast } from "../../../hooks/useToast";
 
 export const useTaskItem = (setTasks, task) => {
   const [newName, setNewName] = useState(task.name);
 
-  const { toastInfo } = UseToast();
-
-  /**
-   * Function to toggle if task complete or not
-   * @param {number} id current id of the task
-   * @param {boolean} completed toggle completed todo
-   */
-  function toggleTodo(id, completed) {
-    setTasks((prevTask) => {
-      return prevTask.map((todo) => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            completed,
-          };
-        }
-        return todo;
-      });
-    });
-    if (completed)
-      toastInfo(`${task.name} a été complété`, "top", "success", 3000);
-  }
 
   /**
    * Function to moveup the current task
@@ -57,7 +34,6 @@ export const useTaskItem = (setTasks, task) => {
     }
   }
   return {
-    toggleTodo,
     moveTaskUp,
     moveTaskDown,
     newName,
