@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Box, Checkbox, Input, ListItem } from "@chakra-ui/react";
 
 import MenuActions from "./MenuActions";
@@ -10,12 +10,19 @@ import {
 } from "../../../constants/crudFunctions";
 import { UseToast } from "../../../hooks/useToast";
 import { moveTaskUp, moveTaskDown } from "../../../constants/moveTaskFunctions";
+import { TaskContext } from "../../../context/TaskProvider";
+import { useCreateTask } from "../../Form/useCreateTask";
 
-const TaskItem = ({ task, tasks, setTasks, index, createSubTask }) => {
+const TaskItem = ({ task, index }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(task.name);
 
+  const { tasks, setTasks } = useContext(TaskContext);
+
   const { toastInfo } = UseToast();
+
+  const { createSubTask } = useCreateTask();
+
 
   return (
     <Box borderRadius="10px" bg="#e0ebeb" color="black" padding="5px">
@@ -49,9 +56,7 @@ const TaskItem = ({ task, tasks, setTasks, index, createSubTask }) => {
           </Checkbox>
         )}
         <MenuActions
-          setTasks={setTasks}
           task={task}
-          tasks={tasks}
           index={index}
           setIsEditing={setIsEditing}
           isEditing={isEditing}
@@ -70,8 +75,6 @@ const TaskItem = ({ task, tasks, setTasks, index, createSubTask }) => {
               moveTaskUp={moveTaskUp}
               moveTaskDown={moveTaskDown}
               editTask={editTask}
-              tasks={tasks}
-              setTasks={setTasks}
             />
           ))}
         </Box>

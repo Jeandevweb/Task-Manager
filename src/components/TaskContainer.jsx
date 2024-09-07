@@ -1,29 +1,18 @@
 import { Box, Divider, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import TaskCreateForm from "./Form/TaskCreateForm";
 
 import TaskControls from "./TaskControls/TaskControls";
 import Tasklist from "./Task/TaskList/Tasklist";
-import { useCreateTask } from "./Form/useCreateTask";
+import { TaskContext } from "../context/TaskProvider";
 
 const TaskContainer = () => {
-  const [filterTask, setFilterTask] = useState("all");
-  const [tasks, setTasks] = useState(() => {
-    const local = localStorage.getItem("ITEMS");
-    if (local === null) return [];
-
-    return JSON.parse(local);
-  });
-
-  const { createNewTask, handleChangeNewTask, newTaskName, createSubTask } =
-    useCreateTask(tasks, setTasks);
+  const { tasks } = useContext(TaskContext);
 
   useEffect(() => {
     if (!tasks) return;
-     localStorage.setItem("ITEMS", JSON.stringify(tasks));
+    localStorage.setItem("ITEMS", JSON.stringify(tasks));
   }, [tasks]);
-
-   
 
   return (
     <Box
@@ -51,27 +40,15 @@ const TaskContainer = () => {
         },
       }}
     >
-      <TaskCreateForm
-        createNewTask={createNewTask}
-        handleChangeNewTask={handleChangeNewTask}
-        newTaskName={newTaskName}
-      />
+      <TaskCreateForm />
+
       <Divider />
-      <TaskControls
-        tasks={tasks}
-        setFilterTask={setFilterTask}
-        setTasks={setTasks}
-        filterTask={filterTask}
-      />
+
+      <TaskControls />
 
       <Text>{tasks.length === 0 && "Pas de tâches créés"}</Text>
 
-      <Tasklist
-        createSubTask={createSubTask}
-        tasks={tasks}
-        setTasks={setTasks}
-        filterTask={filterTask}
-      />
+      <Tasklist />
     </Box>
   );
 };

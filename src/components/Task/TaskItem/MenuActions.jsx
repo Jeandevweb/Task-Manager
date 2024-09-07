@@ -10,10 +10,10 @@ import * as Icons from "../../../icons/reactIcons";
 
 import { editTask, deleteTask } from "../../../constants/crudFunctions";
 import { moveTaskUp, moveTaskDown } from "../../../constants/moveTaskFunctions";
+import { useContext } from "react";
+import { TaskContext } from "../../../context/TaskProvider";
 
 const MenuActions = ({
-  setTasks,
-  tasks,
   task,
   index,
   setIsEditing,
@@ -21,6 +21,9 @@ const MenuActions = ({
   newName,
   createSubTask,
 }) => {
+  
+  const { setTasks, tasks } = useContext(TaskContext);
+
   return (
     <>
       <Menu>

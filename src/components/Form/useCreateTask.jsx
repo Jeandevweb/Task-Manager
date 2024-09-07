@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { UseToast } from "../../hooks/useToast";
+import { TaskContext } from "../../context/TaskProvider";
 
-export const useCreateTask = (tasks, setTasks) => {
-  const [newTaskName, setNewTask] = useState("");
+export const useCreateTask = () => {
   const { toastInfo } = UseToast();
+
+  const { tasks, setTasks, newTaskName, setNewTask } = useContext(TaskContext);
 
   /**
    * Function to create new task
@@ -23,7 +25,7 @@ export const useCreateTask = (tasks, setTasks) => {
       completed: false,
       subTasks: [],
     };
-    
+
     // Insérer aléatoirement dans le tableau des tâches
     const insertRandomly = Math.floor(Math.random() * (tasks.length + 1));
     const newTaskArray = [
@@ -32,15 +34,15 @@ export const useCreateTask = (tasks, setTasks) => {
       ...tasks.slice(insertRandomly),
     ];
 
-     const addSubTask = (t, parentId) =>
-       t.map((task) =>
-         task.id === parentId
-           ? { ...task, subTasks: [...task.subTasks, createTask] }
-           : { ...task, subTasks: addSubTask(task.subTasks, parentId) }
-       );
-     setTasks((prevTasks) =>
-       parentId ? addSubTask(prevTasks, parentId) : newTaskArray
-     );
+    const addSubTask = (t, parentId) =>
+      t.map((task) =>
+        task.id === parentId
+          ? { ...task, subTasks: [...task.subTasks, createTask] }
+          : { ...task, subTasks: addSubTask(task.subTasks, parentId) }
+      );
+    setTasks((prevTasks) =>
+      parentId ? addSubTask(prevTasks, parentId) : newTaskArray
+    );
     setNewTask("");
     toastInfo(`${name} a été créé`, "top", "success", 3000);
   }
@@ -57,7 +59,7 @@ export const useCreateTask = (tasks, setTasks) => {
       setNewTask("");
     }
   };
-  
+
   return {
     createNewTask,
     handleChangeNewTask,

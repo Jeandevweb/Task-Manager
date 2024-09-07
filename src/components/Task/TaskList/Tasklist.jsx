@@ -1,38 +1,17 @@
 import { Box, List } from "@chakra-ui/react";
 import TaskItem from "../TaskItem/TaskItem";
+import { useContext } from "react";
+import { TaskContext } from "../../../context/TaskProvider";
 
-const Tasklist = ({
-  tasks,
-  setTasks,
-  filterTask,
-  createSubTask,
-}) => {
-
-  /**
-   * Filtering tasks if completed or not
-   * @params {array} current tasks
-   * @params {string} name of filter
-   */
-   const filteredTasks = (tasks, filterTask) =>
-     tasks?.filter((task) => {
-       if (filterTask === "completed") return task.completed;
-       if (filterTask === "incomplete") return !task.completed;
-       return true;
-     });
+const Tasklist = () => {
+  const { tasks, filterTask, filteredTasks } = useContext(TaskContext);
 
   return (
     <List>
       {filteredTasks(tasks, filterTask).map((task, index) => {
         return (
           <Box key={index} margin="10px 0">
-            <TaskItem
-              index={index}
-              key={task.id + Date.now()}
-              task={task}
-              tasks={tasks}
-              setTasks={setTasks}
-              createSubTask={createSubTask}
-            />
+            <TaskItem index={index} key={task.id + Date.now()} task={task} />
           </Box>
         );
       })}

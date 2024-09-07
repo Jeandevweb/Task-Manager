@@ -1,10 +1,21 @@
 import { Box, Button, Input, Tooltip } from "@chakra-ui/react";
-import { useTaskControl } from "./useTaskControl";
 import * as Icons from "../../icons/reactIcons";
 
-const TaskControls = ({ setFilterTask, tasks, filterTask, setTasks }) => {
-  const { downloadJsonFile, jsonFileUpload, filtersForButton } =
-    useTaskControl();
+import {
+  downloadJsonFile,
+  jsonFileUpload,
+  filtersForButton,
+} from "./taskControl";
+import { UseToast } from "../../hooks/useToast";
+import { useContext } from "react";
+import { TaskContext } from "../../context/TaskProvider";
+
+const TaskControls = () => {
+  const { toastInfo } = UseToast();
+
+  const { setFilterTask, tasks, filterTask, setTasks } =
+    useContext(TaskContext);
+
 
   return (
     <Box display="flex" flexWrap="nowrap" margin="20px 0 50px">
@@ -30,7 +41,7 @@ const TaskControls = ({ setFilterTask, tasks, filterTask, setTasks }) => {
           <Button
             marginRight="10px"
             size="sm"
-            onClick={() => downloadJsonFile(tasks)}
+            onClick={() => downloadJsonFile(tasks, toastInfo)}
           >
             <Icons.MdCloudDownload />
           </Button>
@@ -50,7 +61,7 @@ const TaskControls = ({ setFilterTask, tasks, filterTask, setTasks }) => {
           type="file"
           accept=".json"
           className="file"
-          onChange={(e) => jsonFileUpload(e, tasks, setTasks)}
+          onChange={(e) => jsonFileUpload(e, tasks, setTasks, toastInfo)}
         />
       </Box>
     </Box>
