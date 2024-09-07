@@ -19,8 +19,9 @@ const MenuActions = ({
   newName,
   createSubTask,
   editTask,
+  deleteTask,
 }) => {
-  const { deleteTask, moveTaskUp, moveTaskDown } = useTaskItem(setTasks, task);
+  const { moveTaskUp, moveTaskDown } = useTaskItem(setTasks, task);
 
   return (
     <>
@@ -74,7 +75,7 @@ const MenuActions = ({
               </MenuItem>
               <MenuItem
                 icon={<Icons.MdDelete />}
-                onClick={() => deleteTask(task.id)}
+                onClick={() => deleteTask(task.id, tasks, setTasks)}
               >
                 Delete Task
               </MenuItem>

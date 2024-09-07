@@ -22,3 +22,25 @@ export function editTask(id, name, tasks, setter) {
   const updatedTasks = updateTask(tasks);
   setter(updatedTasks);
 }
+
+/**
+ * Function to delete current task
+ * @param {number} id current id of the task
+ * @param {array} tasks current tasks
+ * @param {function} setTasks
+ */
+export function deleteTask(id, tasks, setter) {
+  const deleteTask = (taskList) => {
+    return taskList
+      .filter((task) => task.id !== id)
+      .map((task) => {
+        if (task.subTasks && task.subTasks.length > 0) {
+          return { ...task, subTasks: deleteTask(task.subTasks) };
+        }
+        return task;
+      });
+  };
+
+  const updatedTasks = deleteTask(tasks);
+  setter(updatedTasks);
+}

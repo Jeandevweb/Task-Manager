@@ -7,18 +7,6 @@ export const useTaskItem = (setTasks, task) => {
   const { toastInfo } = UseToast();
 
   /**
-   * Function to create new task
-   * @param {number} id current id of the task
-   */
-  function deleteTask(id) {
-    setTasks((prevTask) => {
-      return prevTask.filter((task) => task.id !== id);
-    });
-  }
-  
-
-
-  /**
    * Function to toggle if task complete or not
    * @param {number} id current id of the task
    * @param {boolean} completed toggle completed todo
@@ -69,7 +57,6 @@ export const useTaskItem = (setTasks, task) => {
     }
   }
   return {
-    deleteTask,
     toggleTodo,
     moveTaskUp,
     moveTaskDown,

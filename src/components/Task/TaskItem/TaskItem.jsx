@@ -4,7 +4,7 @@ import { Box, Checkbox,  Input, ListItem } from "@chakra-ui/react";
 import MenuActions from "./MenuActions";
 import { useTaskItem } from "./../TaskItem/useTaskItem";
 
-import { editTask } from "../../../constants/crudFunctions";
+import { editTask, deleteTask } from "../../../constants/crudFunctions";
 
 
 const TaskItem = ({
@@ -19,7 +19,6 @@ const TaskItem = ({
     toggleTodo,
     newName,
     setNewName,
-    deleteTask,
     moveTaskUp,
     moveTaskDown,
   } = useTaskItem(setTasks, task);
@@ -65,6 +64,7 @@ const TaskItem = ({
           newName={newName}
           createSubTask={createSubTask}
           editTask={editTask}
+          deleteTask={deleteTask}
         />
       </ListItem>
       {task.subTasks && (
