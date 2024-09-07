@@ -37,7 +37,7 @@ const TaskControls = () => {
 
       <Box w="20%">
         {/* Bouton pour télécharger les tâches */}
-        <Tooltip label="télécharger votre liste de tâches">
+        <Tooltip label="Exporter en JSON">
           <Button
             marginRight="10px"
             size="sm"
@@ -48,7 +48,7 @@ const TaskControls = () => {
         </Tooltip>
 
         {/* Bouton pour déclencher l'upload */}
-        <Tooltip label="ajouter une liste des tâches">
+        <Tooltip label="Importer JSON">
           <Button
             size="sm"
             onClick={() => document.querySelector(".file").click()}

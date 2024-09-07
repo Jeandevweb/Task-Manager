@@ -1,8 +1,8 @@
 //Filter task to know complete or not
 export const filtersForButton = [
-  { label: "All Tasks", value: "all" },
-  { label: "Completed Tasks", value: "completed" },
-  { label: "Incomplete Tasks", value: "incomplete" },
+  { label: "Toutes les tâches", value: "all" },
+  { label: "Tâches complètes", value: "completed" },
+  { label: "Tâches à faire", value: "incomplete" },
 ];
 
 /**

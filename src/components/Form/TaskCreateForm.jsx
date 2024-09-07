@@ -13,12 +13,12 @@ const TaskCreateForm = () => {
       <FormControl display="flex" gap="5" padding="10px" margin="20px 0">
         <Input
           type="text"
-          placeholder="Add a new task"
+          placeholder="Ajoutez une tâche"
           value={newTaskName}
           onChange={handleChangeNewTask}
         />
-        <Button type="submit" onClick={() => createNewTask(newTaskName)}>
-          Add Task
+        <Button fontSize="sm" type="submit" onClick={() => createNewTask(newTaskName)}>
+          Ajoutez une tâche
         </Button>
       </FormControl>
     </>

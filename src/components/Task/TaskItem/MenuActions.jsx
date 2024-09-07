@@ -41,7 +41,7 @@ const MenuActions = ({
                 icon={<Icons.MdCancel />}
                 onClick={() => setIsEditing(false)}
               >
-                Cancel
+                Annuler
               </MenuItem>
               <MenuItem
                 icon={<Icons.MdOutlineSave />}
@@ -50,7 +50,7 @@ const MenuActions = ({
                   setIsEditing(false);
                 }}
               >
-                Save
+                Sauvegarder
               </MenuItem>
             </>
           ) : (
@@ -60,31 +60,31 @@ const MenuActions = ({
                 onClick={() => moveTaskUp(index, tasks, setTasks)}
                 isDisabled={index === 0}
               >
-                Move Task Up
+                Déplacer vers le haut
               </MenuItem>
               <MenuItem
                 icon={<Icons.MdArrowDropDown />}
                 onClick={() => moveTaskDown(index, tasks, setTasks)}
               >
-                Move Task Down
+                Déplacer vers le bas
               </MenuItem>
               <MenuItem
                 icon={<Icons.MdEdit />}
                 onClick={() => setIsEditing(true)}
               >
-                Edit Task
+                Éditer
               </MenuItem>
               <MenuItem
                 icon={<Icons.MdDelete />}
                 onClick={() => deleteTask(task.id, tasks, setTasks)}
               >
-                Delete Task
+                Supprimer
               </MenuItem>
               <MenuItem
                 icon={<Icons.MdAdd />}
                 onClick={() => createSubTask(task.id)}
               >
-                Add SubTask
+                Ajouter une sous-tâche
               </MenuItem>
             </>
           )}
