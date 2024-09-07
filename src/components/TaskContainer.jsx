@@ -7,13 +7,13 @@ import Tasklist from "./Task/TaskList/Tasklist";
 import { useCreateTask } from "./Form/useCreateTask";
 
 const TaskContainer = () => {
+  const [filterTask, setFilterTask] = useState("all");
   const [tasks, setTasks] = useState(() => {
     const local = localStorage.getItem("ITEMS");
     if (local === null) return [];
 
     return JSON.parse(local);
   });
-  const [filterTask, setFilterTask] = useState("all");
 
   const { createNewTask, handleChangeNewTask, newTaskName, createSubTask } =
     useCreateTask(tasks, setTasks);

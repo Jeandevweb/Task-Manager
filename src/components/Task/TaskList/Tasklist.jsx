@@ -1,6 +1,5 @@
 import { Box, List } from "@chakra-ui/react";
 import TaskItem from "../TaskItem/TaskItem";
-import { useTaskList } from "./useTaskList";
 
 const Tasklist = ({
   tasks,
@@ -8,7 +7,18 @@ const Tasklist = ({
   filterTask,
   createSubTask,
 }) => {
-  const { filteredTasks } = useTaskList();
+
+  /**
+   * Filtering tasks if completed or not
+   * @params {array} current tasks
+   * @params {string} name of filter
+   */
+   const filteredTasks = (tasks, filterTask) =>
+     tasks?.filter((task) => {
+       if (filterTask === "completed") return task.completed;
+       if (filterTask === "incomplete") return !task.completed;
+       return true;
+     });
 
   return (
     <List>

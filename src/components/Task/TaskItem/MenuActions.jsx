@@ -7,7 +7,9 @@ import {
 } from "@chakra-ui/react";
 
 import * as Icons from "../../../icons/reactIcons";
-import { useTaskItem } from "./../TaskItem/useTaskItem";
+
+import { editTask, deleteTask } from "../../../constants/crudFunctions";
+import { moveTaskUp, moveTaskDown } from "../../../constants/moveTaskFunctions";
 
 const MenuActions = ({
   setTasks,
@@ -18,11 +20,7 @@ const MenuActions = ({
   isEditing,
   newName,
   createSubTask,
-  editTask,
-  deleteTask,
 }) => {
-  const { moveTaskUp, moveTaskDown } = useTaskItem(setTasks, task);
-
   return (
     <>
       <Menu>
@@ -56,14 +54,14 @@ const MenuActions = ({
             <>
               <MenuItem
                 icon={<Icons.MdArrowDropUp />}
-                onClick={() => moveTaskUp(index, tasks)}
+                onClick={() => moveTaskUp(index, tasks, setTasks)}
                 isDisabled={index === 0}
               >
                 Move Task Up
               </MenuItem>
               <MenuItem
                 icon={<Icons.MdArrowDropDown />}
-                onClick={() => moveTaskDown(index, tasks)}
+                onClick={() => moveTaskDown(index, tasks, setTasks)}
               >
                 Move Task Down
               </MenuItem>

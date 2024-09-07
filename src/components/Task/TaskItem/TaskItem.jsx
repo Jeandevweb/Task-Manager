@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Box, Checkbox,  Input, ListItem } from "@chakra-ui/react";
+import { Box, Checkbox, Input, ListItem } from "@chakra-ui/react";
 
 import MenuActions from "./MenuActions";
-import { useTaskItem } from "./../TaskItem/useTaskItem";
 
 import {
   editTask,
@@ -10,24 +9,13 @@ import {
   toggleTodo,
 } from "../../../constants/crudFunctions";
 import { UseToast } from "../../../hooks/useToast";
+import { moveTaskUp, moveTaskDown } from "../../../constants/moveTaskFunctions";
 
-
-const TaskItem = ({
-  task,
-  tasks,
-  setTasks,
-  index,
-  createSubTask,
-}) => {
+const TaskItem = ({ task, tasks, setTasks, index, createSubTask }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const { toastInfo } = UseToast();
+  const [newName, setNewName] = useState(task.name);
 
-  const {
-    newName,
-    setNewName,
-    moveTaskUp,
-    moveTaskDown,
-  } = useTaskItem(setTasks, task);
+  const { toastInfo } = UseToast();
 
   return (
     <Box borderRadius="10px" bg="#e0ebeb" color="black" padding="5px">
@@ -69,8 +57,6 @@ const TaskItem = ({
           isEditing={isEditing}
           newName={newName}
           createSubTask={createSubTask}
-          editTask={editTask}
-          deleteTask={deleteTask}
         />
       </ListItem>
       {task.subTasks && (

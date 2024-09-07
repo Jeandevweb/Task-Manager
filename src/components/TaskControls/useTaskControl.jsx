@@ -43,10 +43,13 @@ export const useTaskControl = () => {
     fileReader.readAsText(e.target.files[0], "UTF-8");
     fileReader.onload = (e) => {
       const data = JSON.parse(e.target.result);
-      setTasks([...tasks, ...data]);
-      if (data.length === 0) {
-        toastInfo("Votre fichier téléchargé est vide", "top", "warning", 3000);
-      } else {
+      const existingIds = new Set(tasks.map((task) => task.id));
+      const uniqueData = data.filter((task) => !existingIds.has(task.id));
+      if (uniqueData.length === 0) {
+        toastInfo("Votre fichier téléchargé est vide ou déjà présent", "top", "warning", 3000);
+      }
+      else {
+        setTasks([...tasks, ...uniqueData]);
         toastInfo("Fichier télécharger avec succès", "top", "success", 3000);
       }
     };
