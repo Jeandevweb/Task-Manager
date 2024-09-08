@@ -5,6 +5,7 @@
 2. [Fonctionnalités](#fonctionnalités)
 3. [Installation](#installation)
 4. [Utilisation](#utilisation)
+5. [Démo](#démo)
 
 ---
 
