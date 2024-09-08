@@ -1,5 +1,5 @@
 import { Box, Heading } from "@chakra-ui/react";
-import TaskContainer from "./components/TaskContainer";
+import TaskLayout from "./components/TaskLayout";
 
 import { TaskProvider } from "./context/TaskProvider";
 
@@ -24,7 +24,7 @@ function App() {
           {" "}
           Task Manager{" "}
         </Heading>
-        <TaskContainer />
+        <TaskLayout />
       </Box>
     </TaskProvider>
   );

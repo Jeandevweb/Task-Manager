@@ -5,7 +5,7 @@ import { TaskContext } from "../../context/TaskProvider";
 export const useCreateTask = () => {
   const { toastInfo } = UseToast();
 
-  const { tasks, setTasks, newTaskName, setNewTask } = useContext(TaskContext);
+  const { tasks, setTasks, setNewTask } = useContext(TaskContext);
 
   /**
    * Function to create new task
@@ -63,7 +63,6 @@ export const useCreateTask = () => {
   return {
     createNewTask,
     handleChangeNewTask,
-    newTaskName,
     createSubTask,
   };
 };

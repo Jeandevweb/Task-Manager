@@ -8,8 +8,8 @@ import {
 
 import * as Icons from "../../../icons/reactIcons";
 
-import { editTask, deleteTask } from "../../../constants/crudFunctions";
-import { moveTaskUp, moveTaskDown } from "../../../constants/moveTaskFunctions";
+import { editTask, deleteTask } from "./constants/crudFunctions";
+import { moveTaskUp, moveTaskDown } from "./constants/moveTaskFunctions";
 import { useContext } from "react";
 import { TaskContext } from "../../../context/TaskProvider";
 
@@ -38,12 +38,6 @@ const MenuActions = ({
           {isEditing ? (
             <>
               <MenuItem
-                icon={<Icons.MdCancel />}
-                onClick={() => setIsEditing(false)}
-              >
-                Annuler
-              </MenuItem>
-              <MenuItem
                 icon={<Icons.MdOutlineSave />}
                 onClick={() => {
                   editTask(task.id, newName, tasks, setTasks);
@@ -51,6 +45,12 @@ const MenuActions = ({
                 }}
               >
                 Sauvegarder
+              </MenuItem>
+              <MenuItem
+                icon={<Icons.MdCancel />}
+                onClick={() => setIsEditing(false)}
+              >
+                Annuler
               </MenuItem>
             </>
           ) : (

@@ -3,10 +3,10 @@ import { useContext, useEffect } from "react";
 import TaskCreateForm from "./Form/TaskCreateForm";
 
 import TaskControls from "./TaskControls/TaskControls";
-import Tasklist from "./Task/TaskList/Tasklist";
+import Tasklist from "./TaskList/Tasklist";
 import { TaskContext } from "../context/TaskProvider";
 
-const TaskContainer = () => {
+const TaskLayout = () => {
   const { tasks } = useContext(TaskContext);
 
   useEffect(() => {
@@ -53,4 +53,4 @@ const TaskContainer = () => {
   );
 };
 
-export default TaskContainer;
+export default TaskLayout;

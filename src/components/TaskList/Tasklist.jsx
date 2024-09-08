@@ -1,7 +1,7 @@
 import { Box, List } from "@chakra-ui/react";
-import TaskItem from "../TaskItem/TaskItem";
+import TaskItem from "./TaskItem/TaskItem";
 import { useContext } from "react";
-import { TaskContext } from "../../../context/TaskProvider";
+import { TaskContext } from "../../context/TaskProvider";
 
 const Tasklist = () => {
   const { tasks, filterTask, filteredTasks } = useContext(TaskContext);

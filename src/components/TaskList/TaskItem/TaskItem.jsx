@@ -7,9 +7,9 @@ import {
   editTask,
   deleteTask,
   toggleTodo,
-} from "../../../constants/crudFunctions";
+} from "./constants/crudFunctions";
 import { UseToast } from "../../../hooks/useToast";
-import { moveTaskUp, moveTaskDown } from "../../../constants/moveTaskFunctions";
+import { moveTaskUp, moveTaskDown } from "./constants/moveTaskFunctions";
 import { TaskContext } from "../../../context/TaskProvider";
 import { useCreateTask } from "../../Form/useCreateTask";
 

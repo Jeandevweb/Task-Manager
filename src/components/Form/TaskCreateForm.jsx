@@ -4,8 +4,8 @@ import { TaskContext } from "../../context/TaskProvider";
 import { useCreateTask } from "./useCreateTask";
 
 const TaskCreateForm = () => {
-  const { newTaskName } = useContext(TaskContext);
-  const { createNewTask, handleChangeNewTask } = useCreateTask();
+  const { newTaskName, setNewTask } = useContext(TaskContext);
+  const { createNewTask } = useCreateTask();
 
   return (
     <>
@@ -14,7 +14,7 @@ const TaskCreateForm = () => {
           type="text"
           placeholder="Ajoutez une tâche"
           value={newTaskName}
-          onChange={handleChangeNewTask}
+          onChange={(e)=>setNewTask(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               createNewTask(newTaskName);
