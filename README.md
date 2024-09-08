@@ -49,7 +49,7 @@ Liste les principales fonctionnalités de l'application :
 
 ## Utilisation
 
-### Ajouter des Tâches
+### Gestion des Tâches
 1. Tapez le nom d'une tâche dans le champ de saisie.
 2. Cliquez sur "Ajouter une tâche" ou appuyez sur la touche Entrée pour en créer une nouvelle.
 3. Vous pouvez réorganiser, ajouter une sous-tâche, supprimer ou éditer les tâches via le menu d'actions situé à droite de chacunes des tâches et sous-tâches.
