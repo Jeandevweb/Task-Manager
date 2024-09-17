@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const TaskContext = createContext();
 
@@ -16,6 +16,11 @@ export const TaskProvider = ({ children }) => {
 
   //newtaskname for subtask
   const [newTaskName, setNewTask] = useState("");
+
+    useEffect(() => {
+      if (!tasks) return;
+      localStorage.setItem("ITEMS", JSON.stringify(tasks));
+    }, [tasks]);
 
   /**
    * Filtering tasks if completed or not

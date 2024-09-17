@@ -11,15 +11,15 @@ function App() {
         w="100vw"
         h="100vh"
         position="relative"
-        backgroundColor=" #22313f"
+        backgroundColor=" #FFFFFF"
       >
         <Heading
           as="h1"
           size="2xl"
           textAlign="center"
-          marginBottom="20px"
+          margin="40px 0"
           padding="10px"
-          color="white"
+          color="black"
         >
           {" "}
           Task Manager{" "}

@@ -9,6 +9,7 @@ import {
   MdUploadFile,
   MdCloudDownload,
   MdAdd,
+  MdOutlineMenu,
 } from "react-icons/md";
 
 export {
@@ -22,4 +23,5 @@ export {
   MdUploadFile,
   MdCloudDownload,
   MdAdd,
+  MdOutlineMenu,
 };

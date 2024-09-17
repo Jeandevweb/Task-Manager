@@ -24,68 +24,74 @@ const TaskItem = ({ task, index }) => {
   const { createSubTask } = useCreateTask();
 
   return (
-    <Box borderRadius="10px" bg="#e0ebeb" color="black" padding="5px">
-      <ListItem
-        key={task.id + Date.now()}
-        justifyContent="space-between"
-        display="flex"
-        width="100%"
-        padding="5px 10px"
-        border="1px solid white"
-        borderRadius="10px"
-        background="rgba(127, 199, 235, 0.2)"
-        margin="2px 0"
-      >
-        {isEditing ? (
-          <Input
-            type="text"
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-            autoFocus
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                editTask(task.id, newName, tasks, setTasks);
-                setIsEditing(false);
-              }
-            }}
-          />
-        ) : (
-          <Checkbox
-            isChecked={task.completed}
-            isDisabled={filterTask === "completed"}
-            textDecoration={task.completed ? "line-through" : "none"}
-            onChange={(e) => {
-              toggleTodo(task.id, e.target.checked, tasks, setTasks, toastInfo);
-            }}
-          >
-            {task.name}
-          </Checkbox>
-        )}
-        <MenuActions
-          task={task}
-          index={index}
-          setIsEditing={setIsEditing}
-          isEditing={isEditing}
-          newName={newName}
-          createSubTask={createSubTask}
-        />
-      </ListItem>
-      {task.subTasks && (
-        <Box paddingLeft="20px">
-          {task.subTasks.map((subTask) => (
-            <TaskItem
-              key={subTask.id}
-              task={subTask}
-              deleteTask={deleteTask}
-              createSubTask={createSubTask}
-              moveTaskUp={moveTaskUp}
-              moveTaskDown={moveTaskDown}
-              editTask={editTask}
+    <>
+      <Box width="100%" borderRadius="10px"  color="black" padding="5px" overflowX="hidden">
+        <ListItem
+          key={task.id + Date.now()}
+          justifyContent="space-between"
+          display="flex"
+          width="100%"
+          borderRadius="10px"
+          margin="2px 0"
+        >
+          {isEditing ? (
+            <Input
+              type="text"
+              variant="unstyled"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              autoFocus
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  editTask(task.id, newName, tasks, setTasks);
+                  setIsEditing(false);
+                }
+              }}
             />
-          ))}
-        </Box>
-      )}
-    </Box>
+          ) : (
+            <Checkbox
+              isChecked={task.completed}
+              isDisabled={filterTask === "completed"}
+              textDecoration={task.completed ? "line-through" : "none"}
+              onChange={(e) => {
+                toggleTodo(
+                  task.id,
+                  e.target.checked,
+                  tasks,
+                  setTasks,
+                  toastInfo
+                );
+              }}
+            >
+              {task.name}
+            </Checkbox>
+          )}
+          <MenuActions
+            task={task}
+            index={index}
+            setIsEditing={setIsEditing}
+            isEditing={isEditing}
+            newName={newName}
+            createSubTask={createSubTask}
+          />
+        </ListItem>
+        {task.subTasks && (
+          <Box paddingLeft="20px">
+            {task.subTasks.map((subTask) => (
+              <TaskItem
+                key={subTask.id}
+                task={subTask}
+                deleteTask={deleteTask}
+                createSubTask={createSubTask}
+                moveTaskUp={moveTaskUp}
+                moveTaskDown={moveTaskDown}
+                editTask={editTask}
+              />
+            ))}
+          </Box>
+        )}
+      </Box>
+    </>
   );
 };
 
