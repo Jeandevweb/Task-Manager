@@ -37,7 +37,8 @@ const TaskItem = ({ task, index }) => {
           {isEditing ? (
             <Input
               type="text"
-              variant="unstyled"
+              variant="outline"
+              marginRight="15px"
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
               autoFocus
