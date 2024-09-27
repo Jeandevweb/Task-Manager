@@ -33,7 +33,7 @@ Liste les principales fonctionnalités de l'application :
 ### Étapes
 1. Cloner le dépôt :
    
-   git clone https://github.com/Jeandevweb/test-tech-araiko.git
+   git clone https://github.com/Jeandevweb/Task-Manager.git
 
 
 
